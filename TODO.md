@@ -22,7 +22,7 @@ Status updated: 2026-11-10.
 - [ ] Use the user's clarification: Bluecloud sign-in is handled in FF Focus Fense. Identify its approved sync/share API, account permissions, and ownership boundary.
 - [ ] Implement opt-in upload, invite/link permissions, revoke access, sync status, conflict handling, and recovery. Verify with two test accounts/devices before sharing real books.
 
-### 3. Open-source, one-download distribution — Planned
+### 3. Open-source, one-download distribution — Published v1.0.0
 - [x] Establish canonical public GitHub repository, owner/org, MIT license, and release policy.
 - [ ] Review dependency licenses and remove secrets/personal paths/sample private content.
 - [ ] Create a reproducible one-download Windows package with installer/uninstaller, architecture/runtime requirements, checksums, and release notes; document build-from-source.
@@ -41,14 +41,14 @@ Status updated: 2026-11-10.
 - [ ] Preserve drafts/settings/account state; block update during saves, uploads, authentication, or active chat. Provide cancel, restart-later, rollback, and visible update status.
 - [ ] Test no-update, new-release, bad-checksum, interrupted-download, cancel, and rollback cases before enabling updates.
 
-### 6. Download website and all-in-one Windows package — In progress
+### 6. Download website and all-in-one Windows package — Published
 - [x] Publish an attractive responsive download page with a real Windows x64 package link, version, installation steps, feature/status table, and transparent integration requirements.
 - [x] Bundle the current self-contained Windows app, signed installer, certificate, checksums, and quick-start instructions in one ZIP; verify package integrity.
 - [ ] Include all application-owned features and required runtime in the package; connect optional AI/services only through their owning apps and supported adapters.
 - [ ] Do not claim the package includes all AI models or every external account service. The current AI feature is the Only Chat adapter, which uses the provider configured in Only Chat after the user connects and sends a message. Bluecloud/Secom/3F integrations require their owners' contracts.
 - [x] Deploy the page/package to the official GitHub Pages/release site.
 
-### 7. Authenticode signing — Partial; trust not established
+### 7. Authenticode signing — Self-signed; publisher trust not established
 - [x] Sign EXE and installer with app-specific self-signed certificate; publish public certificate and thumbprint for integrity/source verification.
 - [ ] Replace self-signed certificate with a CA-issued trusted code-signing certificate so Windows validates the publisher and SmartScreen trust can be established.
 
