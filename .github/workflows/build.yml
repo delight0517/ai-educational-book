@@ -1,0 +1,28 @@
+name: Windows build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Build Release
+        run: dotnet build AiEducationalBook.csproj -c Release
+      - name: Publish self-contained x64
+        run: dotnet publish AiEducationalBook.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o artifacts/win-x64
+      - name: Upload candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: AI-Educational-Book-win-x64-candidate
+          path: artifacts/win-x64/AiEducationalBook.exe
