@@ -295,6 +295,42 @@ export const appendLinkToWriterDraft = (record: LinkInboxRecord) => {
   );
 };
 
+export const appendConversationToWriterDraft = (input: {
+  title: string;
+  source: 'chatgpt' | 'gemini';
+  sourceUrl: string;
+  rawText: string;
+}) => {
+  const stored = window.localStorage.getItem(WRITER_DRAFT_KEY);
+  let draft: Record<string, unknown> = {};
+  if (stored) {
+    const parsed: unknown = JSON.parse(stored);
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+      draft = parsed as Record<string, unknown>;
+    }
+  }
+
+  const body = typeof draft['body'] === 'string' ? draft['body'] : '';
+  const bookTitle = typeof draft['title'] === 'string' && draft['title'].trim() ? draft['title'] : '새 책';
+  const sourceName = input.source === 'chatgpt' ? 'ChatGPT' : 'Gemini';
+  const marker = `<!-- shared-conversation-url:${input.sourceUrl} -->`;
+  if (body.includes(marker)) return false;
+  const section = `## ${input.title.trim() || `${sourceName} conversation`}\n\nSource: ${sourceName} (${input.sourceUrl})\n\n### Original conversation\n\n${input.rawText}`;
+  const markedSection = `${marker}\n${section}`;
+  const nextBody = body.trim() ? `${body.trimEnd()}\n\n${markedSection}` : markedSection;
+
+  window.localStorage.setItem(
+    WRITER_DRAFT_KEY,
+    JSON.stringify({
+      ...draft,
+      title: bookTitle,
+      body: nextBody,
+      fileDirty: Boolean(draft['filePath']) || draft['fileDirty'] === true,
+    }),
+  );
+  return true;
+};
+
 export const parseDroppedLink = (data: { html?: string; uriList?: string; plainText?: string }): DroppedLink | null => {
   if (data.html && typeof DOMParser !== 'undefined') {
     const document = new DOMParser().parseFromString(data.html, 'text/html');

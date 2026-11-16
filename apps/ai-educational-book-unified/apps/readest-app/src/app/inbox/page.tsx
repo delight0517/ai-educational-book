@@ -6,6 +6,7 @@ import { getCurrentWebview } from '@tauri-apps/api/webview';
 import { useEnv } from '@/context/EnvContext';
 import { useTranslation } from '@/hooks/useTranslation';
 import {
+  appendConversationToWriterDraft,
   appendLinkToWriterDraft,
   canonicalizeWebUrl,
   classifyInboxFile,
@@ -25,6 +26,14 @@ import {
   saveLinkInboxRecord,
   stageInboxLibraryImport,
 } from '@/services/linkInbox';
+import { createConversationRecord, listConversations, normalizeConversationText, saveConversation } from '@/services/conversationArchive';
+import {
+  captureSharedConversation,
+  getSharedConversationProvider,
+  type CapturedSharedConversation,
+} from '@/services/sharedConversationLink';
+import { openWebBrowser } from '@/services/webBrowser/webBrowser';
+import { getWebBrowserOptions } from '@/services/webBrowser/webBrowserOptions';
 import { getFilename } from '@/utils/path';
 import { isTauriAppPlatform } from '@/services/environment';
 
@@ -66,12 +75,20 @@ export default function InboxPage() {
   const [saveStatus, setSaveStatus] = useState(_('Loading…'));
   const [loadError, setLoadError] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState(false);
+  const [capturedConversation, setCapturedConversation] = useState<CapturedSharedConversation | null>(null);
+  const [captureBusy, setCaptureBusy] = useState(false);
+  const [appendBusy, setAppendBusy] = useState(false);
   const loaded = useRef(false);
   const pendingSaves = useRef(new Map<string, LinkInboxRecord>());
   const pendingFileSaves = useRef(new Map<string, InboxFileRecord>());
   const saveTimer = useRef<number | null>(null);
   const selectedRecord = records.find((record) => record.id === selectedId) ?? null;
   const selectedFileRecord = files.find((record) => record.id === selectedFileId) ?? null;
+  const selectedConversationProvider = selectedRecord ? getSharedConversationProvider(selectedRecord.url) : null;
+
+  useEffect(() => {
+    setCapturedConversation(null);
+  }, [selectedId]);
 
   useEffect(() => {
     let cancelled = false;
@@ -438,6 +455,7 @@ export default function InboxPage() {
       if (!selectedRecord || !loaded.current) return;
       const base = pendingSaves.current.get(selectedRecord.id) ?? selectedRecord;
       const next = { ...base, ...patch, updatedAt: new Date().toISOString() };
+      if (patch.url !== undefined && patch.url !== base.url) setCapturedConversation(null);
       setRecords((current) => current.map((record) => (record.id === next.id ? next : record)));
       queueSave(next);
     },
@@ -525,6 +543,69 @@ export default function InboxPage() {
       router.push('/writer');
     } catch (error) {
       setSaveStatus(error instanceof Error ? _(error.message) : _('Could not update your book draft.'));
+    }
+  };
+
+  const captureSelectedConversation = async () => {
+    if (!selectedRecord || !selectedConversationProvider || captureBusy) return;
+    if (!isTauriAppPlatform()) {
+      setSaveStatus(_('Shared conversation capture requires the desktop app.'));
+      return;
+    }
+    setCapturedConversation(null);
+    setCaptureBusy(true);
+    try {
+      const result = await openWebBrowser(
+        selectedRecord.url,
+        getWebBrowserOptions(_, !!appService?.isEink),
+      );
+      if (!result.page) {
+        setSaveStatus(_('No page was captured. Reopen the share link and choose Clip Page.'));
+        return;
+      }
+      const captured = captureSharedConversation(result.page, selectedConversationProvider, selectedRecord.title);
+      setCapturedConversation(captured);
+      setSaveStatus(_('Conversation captured. Review the original text below.'));
+    } catch (error) {
+      setSaveStatus(error instanceof Error ? _(error.message) : _('Could not capture this shared conversation.'));
+    } finally {
+      setCaptureBusy(false);
+    }
+  };
+
+  const addCapturedConversationToBook = async () => {
+    if (!capturedConversation || appendBusy) return;
+    setAppendBusy(true);
+    try {
+      const existing = await listConversations();
+      const normalized = normalizeConversationText(capturedConversation.rawText);
+      const alreadyArchived = existing.some(
+        (record) => normalizeConversationText(record.rawText) === normalized,
+      );
+      if (!alreadyArchived) {
+        const record = createConversationRecord({
+          rawText: capturedConversation.rawText,
+          source: capturedConversation.provider,
+          title: capturedConversation.title,
+        });
+        record.notes = `Captured from shared link: ${capturedConversation.sourceUrl}`;
+        await saveConversation(record);
+      }
+      const appended = appendConversationToWriterDraft({
+        title: capturedConversation.title,
+        source: capturedConversation.provider,
+        sourceUrl: capturedConversation.sourceUrl,
+        rawText: capturedConversation.rawText,
+      });
+      if (!appended) {
+        setSaveStatus(_('This shared link is already in the current book.'));
+      }
+      setCapturedConversation(null);
+      router.push('/writer');
+    } catch (error) {
+      setSaveStatus(error instanceof Error ? _(error.message) : _('Could not add this conversation to your book.'));
+    } finally {
+      setAppendBusy(false);
     }
   };
 
@@ -708,6 +789,16 @@ export default function InboxPage() {
                   >
                     {_('Open original')}
                   </button>
+                  {selectedConversationProvider && (
+                    <button
+                      type='button'
+                      className='btn btn-sm'
+                      onClick={() => void captureSelectedConversation()}
+                      disabled={captureBusy}
+                    >
+                      {captureBusy ? _('Opening shared conversation…') : _('Capture conversation transcript')}
+                    </button>
+                  )}
                   <button
                     type='button'
                     className='btn btn-sm'
@@ -737,6 +828,49 @@ export default function InboxPage() {
                 <p className='text-base-content/65 text-xs'>
                   {_('Saved {{date}}', { date: new Date(selectedRecord.addedAt).toLocaleString() })}
                 </p>
+
+                {selectedConversationProvider && !capturedConversation && (
+                  <p className='text-base-content/65 text-sm leading-relaxed'>
+                    {_('Capture opens this public share page in the in-app browser. Scroll through the full conversation, choose Clip Page, then review it here before adding it.')}
+                  </p>
+                )}
+
+                {capturedConversation && (
+                  <section className='eink-bordered flex flex-col gap-3 rounded-lg border border-base-300 p-3' aria-label={_('Captured conversation preview')}>
+                    <div className='flex flex-wrap items-center justify-between gap-2'>
+                      <h2 className='font-semibold'>{_('Review captured conversation')}</h2>
+                      <button type='button' className='btn btn-sm btn-ghost' onClick={() => setCapturedConversation(null)} disabled={appendBusy}>
+                        {_('Discard preview')}
+                      </button>
+                    </div>
+                    <p className='text-base-content/65 break-all text-xs'>{_('Source link: {{url}}', { url: capturedConversation.sourceUrl })}</p>
+                    <label className='flex flex-col gap-1 text-sm'>
+                      {_('Conversation title')}
+                      <input
+                        className='input input-sm eink-bordered w-full'
+                        value={capturedConversation.title}
+                        onChange={(event) => setCapturedConversation({ ...capturedConversation, title: event.target.value })}
+                      />
+                    </label>
+                    {capturedConversation.warning && <p className='text-warning text-sm'>{_(capturedConversation.warning)}</p>}
+                    <label className='flex flex-col gap-1 text-sm'>
+                      {_('Captured text (review before adding)')}
+                      <textarea
+                        className='textarea eink-bordered min-h-72 w-full font-mono text-xs leading-5'
+                        value={capturedConversation.rawText}
+                        onChange={(event) => setCapturedConversation({ ...capturedConversation, rawText: event.target.value })}
+                      />
+                    </label>
+                    <button
+                      type='button'
+                      className='btn btn-sm btn-primary self-start'
+                      onClick={() => void addCapturedConversationToBook()}
+                      disabled={appendBusy || !capturedConversation.rawText.trim()}
+                    >
+                      {appendBusy ? _('Saving conversation…') : _('Add transcript to current book')}
+                    </button>
+                  </section>
+                )}
 
                 <label className='flex flex-col gap-1 text-sm'>
                   {_('Tags, separated by commas')}
