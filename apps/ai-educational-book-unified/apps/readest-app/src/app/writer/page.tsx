@@ -287,6 +287,9 @@ export default function WriterPage() {
         <button type='button' className='btn btn-sm' onClick={() => void navigateAfterSave('/inbox')}>
           {_('Link Inbox')}
         </button>
+        <button type='button' className='btn btn-sm' onClick={() => void navigateAfterSave('/notion')}>
+          {_('Notion data sync')}
+        </button>
         <div className='ms-auto flex items-center gap-2'>
           <span className='text-neutral-content text-xs' role='status' aria-live='polite'>
             {saveState === 'loading'
