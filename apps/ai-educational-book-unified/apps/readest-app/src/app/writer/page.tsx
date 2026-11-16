@@ -235,6 +235,11 @@ export default function WriterPage() {
 
   useEffect(() => {
     const handleShortcut = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'n') {
+        event.preventDefault();
+        createBook();
+        return;
+      }
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {
         event.preventDefault();
         void flushSave();
@@ -242,7 +247,7 @@ export default function WriterPage() {
     };
     window.addEventListener('keydown', handleShortcut);
     return () => window.removeEventListener('keydown', handleShortcut);
-  }, [flushSave]);
+  }, [createBook, flushSave]);
 
   const navigateAfterSave = async (path: string) => {
     if (await flushSave()) router.push(path);
