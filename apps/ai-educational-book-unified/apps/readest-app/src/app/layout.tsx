@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { ViewTransitions } from '@/components/ViewTransitions';
 import { EnvProvider } from '@/context/EnvContext';
 import Providers from '@/components/Providers';
+import BookCreationShortcut from './BookCreationShortcut';
 
 import '../styles/globals.css';
 
@@ -147,7 +148,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <ViewTransitions>
           <EnvProvider>
-            <Providers>{children}</Providers>
+            <Providers>
+              <BookCreationShortcut />
+              {children}
+            </Providers>
           </EnvProvider>
         </ViewTransitions>
       </body>

@@ -48,6 +48,9 @@ export default function WriterPage() {
   const workspaceRevision = useRef(0);
   const loaded = useRef(false);
   const saveQueue = useRef<Promise<void>>(Promise.resolve());
+  const titleInputRef = useRef<HTMLInputElement>(null);
+  const focusNewBookTitle = useRef(false);
+  const pendingNewBook = useRef(false);
 
   const installWorkspace = useCallback((next: BookWorkspace) => {
     workspaceRef.current = next;
@@ -66,8 +69,26 @@ export default function WriterPage() {
     void loadBookWorkspace()
       .then((loadedWorkspace) => {
         if (cancelled) return;
-        workspaceRef.current = loadedWorkspace;
-        setWorkspace(loadedWorkspace);
+        const requestedBookId = new URL(window.location.href).searchParams.get('bookId');
+        const selectedWorkspace = requestedBookId
+          ? selectBookDocument(loadedWorkspace, requestedBookId)
+          : loadedWorkspace;
+        if (requestedBookId) {
+          focusNewBookTitle.current = true;
+          const currentUrl = new URL(window.location.href);
+          currentUrl.searchParams.delete('bookId');
+          window.history.replaceState(null, '', currentUrl);
+        }
+        const initialWorkspace = pendingNewBook.current
+          ? createBookDocument(selectedWorkspace)
+          : selectedWorkspace;
+        pendingNewBook.current = false;
+        if (initialWorkspace !== selectedWorkspace) {
+          focusNewBookTitle.current = true;
+          setViewMode('edit');
+        }
+        workspaceRef.current = initialWorkspace;
+        setWorkspace(initialWorkspace);
         loaded.current = true;
         setSaveState('saved');
       })
@@ -107,6 +128,13 @@ export default function WriterPage() {
   }, [enqueueSave]);
 
   const activeDocument = workspace?.documents.find((document) => document.id === workspace.activeId) ?? null;
+
+  useEffect(() => {
+    if (!activeDocument || !focusNewBookTitle.current) return;
+    focusNewBookTitle.current = false;
+    titleInputRef.current?.focus();
+    titleInputRef.current?.select();
+  }, [activeDocument?.id]);
 
   const updateActiveDocument = useCallback(
     (changes: Partial<Pick<BookDocument, 'title' | 'body' | 'filePath' | 'fileDirty'>>) => {
@@ -183,18 +211,27 @@ export default function WriterPage() {
     }
   };
 
-  const createBook = () => {
+  const createBook = useCallback(() => {
     const current = workspaceRef.current;
-    if (!current) return;
+    if (!current) {
+      pendingNewBook.current = true;
+      return;
+    }
+    focusNewBookTitle.current = true;
     installWorkspace(createBookDocument(current));
     setViewMode('edit');
-  };
+  }, [installWorkspace]);
 
   const selectBook = (id: string) => {
     const current = workspaceRef.current;
     if (!current) return;
     installWorkspace(selectBookDocument(current, id));
   };
+
+  useEffect(() => {
+    window.addEventListener('ai-educational-book:new-book', createBook);
+    return () => window.removeEventListener('ai-educational-book:new-book', createBook);
+  }, [createBook]);
 
   useEffect(() => {
     const handleShortcut = (event: KeyboardEvent) => {
@@ -235,7 +272,13 @@ export default function WriterPage() {
             </option>
           ))}
         </select>
-        <button type='button' className='btn btn-sm' onClick={createBook} disabled={!workspace}>
+        <button
+          type='button'
+          className='btn btn-sm'
+          onClick={createBook}
+          disabled={!workspace}
+          aria-keyshortcuts='Control+N Meta+N'
+        >
           새 책
         </button>
         <button type='button' className='btn btn-sm' onClick={() => void navigateAfterSave('/conversations')}>
@@ -297,6 +340,7 @@ export default function WriterPage() {
                 <label className='sr-only' htmlFor='writer-title'>책 제목</label>
                 <input
                   id='writer-title'
+                  ref={titleInputRef}
                   className='border-base-300 bg-base-100 border-b px-5 py-3 text-xl font-semibold outline-none'
                   value={activeDocument.title}
                   onChange={(event) =>
