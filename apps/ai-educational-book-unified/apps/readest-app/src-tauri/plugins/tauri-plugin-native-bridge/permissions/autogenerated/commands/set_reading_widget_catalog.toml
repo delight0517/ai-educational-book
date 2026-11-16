@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-set-reading-widget-catalog"
+description = "Enables the set_reading_widget_catalog command without any pre-configured scope."
+commands.allow = ["set_reading_widget_catalog"]
+
+[[permission]]
+identifier = "deny-set-reading-widget-catalog"
+description = "Denies the set_reading_widget_catalog command without any pre-configured scope."
+commands.deny = ["set_reading_widget_catalog"]

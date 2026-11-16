@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-paper-curl"
+description = "Enables the paper_curl command without any pre-configured scope."
+commands.allow = ["paper_curl"]
+
+[[permission]]
+identifier = "deny-paper-curl"
+description = "Denies the paper_curl command without any pre-configured scope."
+commands.deny = ["paper_curl"]

@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-get-comic-page-sizes"
+description = "Enables the get_comic_page_sizes command without any pre-configured scope."
+commands.allow = ["get_comic_page_sizes"]
+
+[[permission]]
+identifier = "deny-get-comic-page-sizes"
+description = "Denies the get_comic_page_sizes command without any pre-configured scope."
+commands.deny = ["get_comic_page_sizes"]

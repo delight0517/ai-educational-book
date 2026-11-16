@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-stop-raw-drawing"
+description = "Enables the stop_raw_drawing command without any pre-configured scope."
+commands.allow = ["stop_raw_drawing"]
+
+[[permission]]
+identifier = "deny-stop-raw-drawing"
+description = "Denies the stop_raw_drawing command without any pre-configured scope."
+commands.deny = ["stop_raw_drawing"]

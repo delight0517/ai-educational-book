@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-anki-update-tags"
+description = "Enables the anki_update_tags command without any pre-configured scope."
+commands.allow = ["anki_update_tags"]
+
+[[permission]]
+identifier = "deny-anki-update-tags"
+description = "Denies the anki_update_tags command without any pre-configured scope."
+commands.deny = ["anki_update_tags"]

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-anki-add-notes"
+description = "Enables the anki_add_notes command without any pre-configured scope."
+commands.allow = ["anki_add_notes"]
+
+[[permission]]
+identifier = "deny-anki-add-notes"
+description = "Denies the anki_add_notes command without any pre-configured scope."
+commands.deny = ["anki_add_notes"]

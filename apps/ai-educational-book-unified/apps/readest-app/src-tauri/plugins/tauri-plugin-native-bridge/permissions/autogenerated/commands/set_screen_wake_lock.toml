@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-set-screen-wake-lock"
+description = "Enables the set_screen_wake_lock command without any pre-configured scope."
+commands.allow = ["set_screen_wake_lock"]
+
+[[permission]]
+identifier = "deny-set-screen-wake-lock"
+description = "Denies the set_screen_wake_lock command without any pre-configured scope."
+commands.deny = ["set_screen_wake_lock"]

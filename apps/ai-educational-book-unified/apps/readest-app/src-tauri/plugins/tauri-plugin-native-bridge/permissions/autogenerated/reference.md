@@ -1,0 +1,2064 @@
+## Default Permission
+
+Default permissions for the plugin
+
+#### This default permission set includes the following:
+
+- `allow-auth-with-safari`
+- `allow-auth-with-custom-tab`
+- `allow-copy-uri-to-path`
+- `allow-save-image-to-gallery`
+- `allow-use-background-audio`
+- `allow-set-multicast-lock`
+- `allow-install-package`
+- `allow-set-system-ui-visibility`
+- `allow-get-status-bar-height`
+- `allow-get-sys-fonts-list`
+- `allow-intercept-keys`
+- `allow-lock-screen-orientation`
+- `allow-iap-is-available`
+- `allow-iap-initialize`
+- `allow-iap-fetch-products`
+- `allow-iap-purchase-product`
+- `allow-iap-restore-purchases`
+- `allow-get-system-color-scheme`
+- `allow-get-safe-area-insets`
+- `allow-get-screen-brightness`
+- `allow-set-screen-brightness`
+- `allow-set-screen-wake-lock`
+- `allow-has-ambient-light-sensor`
+- `allow-start-ambient-light-updates`
+- `allow-stop-ambient-light-updates`
+- `allow-get-external-sdcard-path`
+- `allow-open-external-url`
+- `allow-show-lookup-popover`
+- `allow-get-lookup-apps`
+- `allow-set-lookup-app`
+- `allow-anki-status`
+- `allow-anki-request-permission`
+- `allow-anki-list-decks`
+- `allow-anki-read-deck`
+- `allow-anki-add-notes`
+- `allow-anki-update-tags`
+- `allow-select-directory`
+- `allow-show-file-picker`
+- `allow-get-storefront-region-code`
+- `allow-request-manage-storage-permission`
+- `allow-register-listener`
+- `allow-remove-listener`
+- `allow-check-permissions`
+- `allow-request-permissions`
+- `allow-checkPermissions`
+- `allow-requestPermissions`
+- `allow-set-sync-passphrase`
+- `allow-get-sync-passphrase`
+- `allow-clear-sync-passphrase`
+- `allow-is-sync-keychain-available`
+- `allow-set-secure-item`
+- `allow-get-secure-item`
+- `allow-clear-secure-item`
+- `allow-refresh-eink-screen`
+- `allow-is-eink-refresh-supported`
+- `allow-update-bookshelf-widget`
+- `allow-get-bookshelf-widget-instances`
+- `allow-set-bookshelf-widget-catalog`
+- `allow-query-pen-capabilities`
+- `allow-start-raw-drawing`
+- `allow-stop-raw-drawing`
+- `allow-update-reading-widget`
+- `allow-get-reading-widget-instances`
+- `allow-set-reading-widget-catalog`
+- `allow-capture-webview-region`
+- `allow-paper-curl`
+- `allow-cover-webview-region`
+- `allow-uncover-webview-region`
+- `allow-set-selection-suppressed`
+- `allow-read-share-clip-html`
+- `allow-icloud-container-status`
+- `allow-icloud-ensure-downloaded`
+
+## Permission Table
+
+<table>
+<tr>
+<th>Identifier</th>
+<th>Description</th>
+</tr>
+
+
+<tr>
+<td>
+
+`native-bridge:allow-anki-add-notes`
+
+</td>
+<td>
+
+Enables the anki_add_notes command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-anki-add-notes`
+
+</td>
+<td>
+
+Denies the anki_add_notes command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-anki-list-decks`
+
+</td>
+<td>
+
+Enables the anki_list_decks command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-anki-list-decks`
+
+</td>
+<td>
+
+Denies the anki_list_decks command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-anki-read-deck`
+
+</td>
+<td>
+
+Enables the anki_read_deck command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-anki-read-deck`
+
+</td>
+<td>
+
+Denies the anki_read_deck command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-anki-request-permission`
+
+</td>
+<td>
+
+Enables the anki_request_permission command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-anki-request-permission`
+
+</td>
+<td>
+
+Denies the anki_request_permission command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-anki-status`
+
+</td>
+<td>
+
+Enables the anki_status command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-anki-status`
+
+</td>
+<td>
+
+Denies the anki_status command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-anki-update-tags`
+
+</td>
+<td>
+
+Enables the anki_update_tags command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-anki-update-tags`
+
+</td>
+<td>
+
+Denies the anki_update_tags command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-auth-with-custom-tab`
+
+</td>
+<td>
+
+Enables the auth_with_custom_tab command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-auth-with-custom-tab`
+
+</td>
+<td>
+
+Denies the auth_with_custom_tab command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-auth-with-safari`
+
+</td>
+<td>
+
+Enables the auth_with_safari command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-auth-with-safari`
+
+</td>
+<td>
+
+Denies the auth_with_safari command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-capture-webview-region`
+
+</td>
+<td>
+
+Enables the capture_webview_region command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-capture-webview-region`
+
+</td>
+<td>
+
+Denies the capture_webview_region command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-checkPermissions`
+
+</td>
+<td>
+
+Enables the checkPermissions command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-checkPermissions`
+
+</td>
+<td>
+
+Denies the checkPermissions command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-check-permissions`
+
+</td>
+<td>
+
+Enables the check_permissions command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-check-permissions`
+
+</td>
+<td>
+
+Denies the check_permissions command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-clear-secure-item`
+
+</td>
+<td>
+
+Enables the clear_secure_item command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-clear-secure-item`
+
+</td>
+<td>
+
+Denies the clear_secure_item command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-clear-sync-passphrase`
+
+</td>
+<td>
+
+Enables the clear_sync_passphrase command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-clear-sync-passphrase`
+
+</td>
+<td>
+
+Denies the clear_sync_passphrase command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-clip-url`
+
+</td>
+<td>
+
+Enables the clip_url command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-clip-url`
+
+</td>
+<td>
+
+Denies the clip_url command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-copy-uri-to-path`
+
+</td>
+<td>
+
+Enables the copy_uri_to_path command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-copy-uri-to-path`
+
+</td>
+<td>
+
+Denies the copy_uri_to_path command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-cover-webview-region`
+
+</td>
+<td>
+
+Enables the cover_webview_region command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-cover-webview-region`
+
+</td>
+<td>
+
+Denies the cover_webview_region command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-get-bookshelf-widget-instances`
+
+</td>
+<td>
+
+Enables the get_bookshelf_widget_instances command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-get-bookshelf-widget-instances`
+
+</td>
+<td>
+
+Denies the get_bookshelf_widget_instances command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-get-external-sdcard-path`
+
+</td>
+<td>
+
+Enables the get_external_sdcard_path command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-get-external-sdcard-path`
+
+</td>
+<td>
+
+Denies the get_external_sdcard_path command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-get-lookup-apps`
+
+</td>
+<td>
+
+Enables the get_lookup_apps command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-get-lookup-apps`
+
+</td>
+<td>
+
+Denies the get_lookup_apps command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-get-reading-widget-instances`
+
+</td>
+<td>
+
+Enables the get_reading_widget_instances command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-get-reading-widget-instances`
+
+</td>
+<td>
+
+Denies the get_reading_widget_instances command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-get-safe-area-insets`
+
+</td>
+<td>
+
+Enables the get_safe_area_insets command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-get-safe-area-insets`
+
+</td>
+<td>
+
+Denies the get_safe_area_insets command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-get-screen-brightness`
+
+</td>
+<td>
+
+Enables the get_screen_brightness command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-get-screen-brightness`
+
+</td>
+<td>
+
+Denies the get_screen_brightness command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-get-secure-item`
+
+</td>
+<td>
+
+Enables the get_secure_item command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-get-secure-item`
+
+</td>
+<td>
+
+Denies the get_secure_item command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-get-status-bar-height`
+
+</td>
+<td>
+
+Enables the get_status_bar_height command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-get-status-bar-height`
+
+</td>
+<td>
+
+Denies the get_status_bar_height command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-get-storefront-region-code`
+
+</td>
+<td>
+
+Enables the get_storefront_region_code command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-get-storefront-region-code`
+
+</td>
+<td>
+
+Denies the get_storefront_region_code command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-get-sync-passphrase`
+
+</td>
+<td>
+
+Enables the get_sync_passphrase command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-get-sync-passphrase`
+
+</td>
+<td>
+
+Denies the get_sync_passphrase command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-get-sys-fonts-list`
+
+</td>
+<td>
+
+Enables the get_sys_fonts_list command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-get-sys-fonts-list`
+
+</td>
+<td>
+
+Denies the get_sys_fonts_list command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-get-system-color-scheme`
+
+</td>
+<td>
+
+Enables the get_system_color_scheme command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-get-system-color-scheme`
+
+</td>
+<td>
+
+Denies the get_system_color_scheme command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-has-ambient-light-sensor`
+
+</td>
+<td>
+
+Enables the has_ambient_light_sensor command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-has-ambient-light-sensor`
+
+</td>
+<td>
+
+Denies the has_ambient_light_sensor command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-iap-fetch-products`
+
+</td>
+<td>
+
+Enables the iap_fetch_products command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-iap-fetch-products`
+
+</td>
+<td>
+
+Denies the iap_fetch_products command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-iap-initialize`
+
+</td>
+<td>
+
+Enables the iap_initialize command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-iap-initialize`
+
+</td>
+<td>
+
+Denies the iap_initialize command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-iap-is-available`
+
+</td>
+<td>
+
+Enables the iap_is_available command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-iap-is-available`
+
+</td>
+<td>
+
+Denies the iap_is_available command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-iap-purchase-product`
+
+</td>
+<td>
+
+Enables the iap_purchase_product command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-iap-purchase-product`
+
+</td>
+<td>
+
+Denies the iap_purchase_product command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-iap-restore-purchases`
+
+</td>
+<td>
+
+Enables the iap_restore_purchases command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-iap-restore-purchases`
+
+</td>
+<td>
+
+Denies the iap_restore_purchases command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-icloud-container-status`
+
+</td>
+<td>
+
+Enables the icloud_container_status command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-icloud-container-status`
+
+</td>
+<td>
+
+Denies the icloud_container_status command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-icloud-ensure-downloaded`
+
+</td>
+<td>
+
+Enables the icloud_ensure_downloaded command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-icloud-ensure-downloaded`
+
+</td>
+<td>
+
+Denies the icloud_ensure_downloaded command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-install-package`
+
+</td>
+<td>
+
+Enables the install_package command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-install-package`
+
+</td>
+<td>
+
+Denies the install_package command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-intercept-keys`
+
+</td>
+<td>
+
+Enables the intercept_keys command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-intercept-keys`
+
+</td>
+<td>
+
+Denies the intercept_keys command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-is-eink-refresh-supported`
+
+</td>
+<td>
+
+Enables the is_eink_refresh_supported command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-is-eink-refresh-supported`
+
+</td>
+<td>
+
+Denies the is_eink_refresh_supported command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-is-sync-keychain-available`
+
+</td>
+<td>
+
+Enables the is_sync_keychain_available command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-is-sync-keychain-available`
+
+</td>
+<td>
+
+Denies the is_sync_keychain_available command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-lock-screen-orientation`
+
+</td>
+<td>
+
+Enables the lock_screen_orientation command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-lock-screen-orientation`
+
+</td>
+<td>
+
+Denies the lock_screen_orientation command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-open-external-url`
+
+</td>
+<td>
+
+Enables the open_external_url command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-open-external-url`
+
+</td>
+<td>
+
+Denies the open_external_url command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-open-web-browser`
+
+</td>
+<td>
+
+Enables the open_web_browser command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-open-web-browser`
+
+</td>
+<td>
+
+Denies the open_web_browser command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-paper-curl`
+
+</td>
+<td>
+
+Enables the paper_curl command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-paper-curl`
+
+</td>
+<td>
+
+Denies the paper_curl command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-query-pen-capabilities`
+
+</td>
+<td>
+
+Enables the query_pen_capabilities command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-query-pen-capabilities`
+
+</td>
+<td>
+
+Denies the query_pen_capabilities command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-read-share-clip-html`
+
+</td>
+<td>
+
+Enables the read_share_clip_html command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-read-share-clip-html`
+
+</td>
+<td>
+
+Denies the read_share_clip_html command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-refresh-eink-screen`
+
+</td>
+<td>
+
+Enables the refresh_eink_screen command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-refresh-eink-screen`
+
+</td>
+<td>
+
+Denies the refresh_eink_screen command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-register-listener`
+
+</td>
+<td>
+
+Enables the register_listener command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-register-listener`
+
+</td>
+<td>
+
+Denies the register_listener command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-remove-listener`
+
+</td>
+<td>
+
+Enables the remove_listener command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-remove-listener`
+
+</td>
+<td>
+
+Denies the remove_listener command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-render-pdf-cover`
+
+</td>
+<td>
+
+Enables the render_pdf_cover command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-render-pdf-cover`
+
+</td>
+<td>
+
+Denies the render_pdf_cover command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-requestPermissions`
+
+</td>
+<td>
+
+Enables the requestPermissions command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-requestPermissions`
+
+</td>
+<td>
+
+Denies the requestPermissions command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-request-manage-storage-permission`
+
+</td>
+<td>
+
+Enables the request_manage_storage_permission command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-request-manage-storage-permission`
+
+</td>
+<td>
+
+Denies the request_manage_storage_permission command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-request-permissions`
+
+</td>
+<td>
+
+Enables the request_permissions command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-request-permissions`
+
+</td>
+<td>
+
+Denies the request_permissions command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-save-image-to-gallery`
+
+</td>
+<td>
+
+Enables the save_image_to_gallery command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-save-image-to-gallery`
+
+</td>
+<td>
+
+Denies the save_image_to_gallery command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-select-directory`
+
+</td>
+<td>
+
+Enables the select_directory command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-select-directory`
+
+</td>
+<td>
+
+Denies the select_directory command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-set-bookshelf-widget-catalog`
+
+</td>
+<td>
+
+Enables the set_bookshelf_widget_catalog command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-set-bookshelf-widget-catalog`
+
+</td>
+<td>
+
+Denies the set_bookshelf_widget_catalog command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-set-lookup-app`
+
+</td>
+<td>
+
+Enables the set_lookup_app command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-set-lookup-app`
+
+</td>
+<td>
+
+Denies the set_lookup_app command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-set-multicast-lock`
+
+</td>
+<td>
+
+Enables the set_multicast_lock command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-set-multicast-lock`
+
+</td>
+<td>
+
+Denies the set_multicast_lock command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-set-reading-widget-catalog`
+
+</td>
+<td>
+
+Enables the set_reading_widget_catalog command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-set-reading-widget-catalog`
+
+</td>
+<td>
+
+Denies the set_reading_widget_catalog command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-set-screen-brightness`
+
+</td>
+<td>
+
+Enables the set_screen_brightness command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-set-screen-brightness`
+
+</td>
+<td>
+
+Denies the set_screen_brightness command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-set-screen-wake-lock`
+
+</td>
+<td>
+
+Enables the set_screen_wake_lock command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-set-screen-wake-lock`
+
+</td>
+<td>
+
+Denies the set_screen_wake_lock command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-set-secure-item`
+
+</td>
+<td>
+
+Enables the set_secure_item command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-set-secure-item`
+
+</td>
+<td>
+
+Denies the set_secure_item command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-set-selection-suppressed`
+
+</td>
+<td>
+
+Enables the set_selection_suppressed command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-set-selection-suppressed`
+
+</td>
+<td>
+
+Denies the set_selection_suppressed command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-set-sync-passphrase`
+
+</td>
+<td>
+
+Enables the set_sync_passphrase command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-set-sync-passphrase`
+
+</td>
+<td>
+
+Denies the set_sync_passphrase command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-set-system-ui-visibility`
+
+</td>
+<td>
+
+Enables the set_system_ui_visibility command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-set-system-ui-visibility`
+
+</td>
+<td>
+
+Denies the set_system_ui_visibility command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-set-web-browser-status`
+
+</td>
+<td>
+
+Enables the set_web_browser_status command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-set-web-browser-status`
+
+</td>
+<td>
+
+Denies the set_web_browser_status command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-show-file-picker`
+
+</td>
+<td>
+
+Enables the show_file_picker command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-show-file-picker`
+
+</td>
+<td>
+
+Denies the show_file_picker command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-show-lookup-popover`
+
+</td>
+<td>
+
+Enables the show_lookup_popover command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-show-lookup-popover`
+
+</td>
+<td>
+
+Denies the show_lookup_popover command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-start-ambient-light-updates`
+
+</td>
+<td>
+
+Enables the start_ambient_light_updates command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-start-ambient-light-updates`
+
+</td>
+<td>
+
+Denies the start_ambient_light_updates command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-start-raw-drawing`
+
+</td>
+<td>
+
+Enables the start_raw_drawing command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-start-raw-drawing`
+
+</td>
+<td>
+
+Denies the start_raw_drawing command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-stop-ambient-light-updates`
+
+</td>
+<td>
+
+Enables the stop_ambient_light_updates command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-stop-ambient-light-updates`
+
+</td>
+<td>
+
+Denies the stop_ambient_light_updates command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-stop-raw-drawing`
+
+</td>
+<td>
+
+Enables the stop_raw_drawing command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-stop-raw-drawing`
+
+</td>
+<td>
+
+Denies the stop_raw_drawing command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-uncover-webview-region`
+
+</td>
+<td>
+
+Enables the uncover_webview_region command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-uncover-webview-region`
+
+</td>
+<td>
+
+Denies the uncover_webview_region command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-update-bookshelf-widget`
+
+</td>
+<td>
+
+Enables the update_bookshelf_widget command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-update-bookshelf-widget`
+
+</td>
+<td>
+
+Denies the update_bookshelf_widget command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-update-reading-widget`
+
+</td>
+<td>
+
+Enables the update_reading_widget command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-update-reading-widget`
+
+</td>
+<td>
+
+Denies the update_reading_widget command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:allow-use-background-audio`
+
+</td>
+<td>
+
+Enables the use_background_audio command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`native-bridge:deny-use-background-audio`
+
+</td>
+<td>
+
+Denies the use_background_audio command without any pre-configured scope.
+
+</td>
+</tr>
+</table>

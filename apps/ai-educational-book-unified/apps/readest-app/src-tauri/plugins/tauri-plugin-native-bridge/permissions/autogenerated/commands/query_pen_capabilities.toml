@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-query-pen-capabilities"
+description = "Enables the query_pen_capabilities command without any pre-configured scope."
+commands.allow = ["query_pen_capabilities"]
+
+[[permission]]
+identifier = "deny-query-pen-capabilities"
+description = "Denies the query_pen_capabilities command without any pre-configured scope."
+commands.deny = ["query_pen_capabilities"]

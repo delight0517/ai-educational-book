@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-get-explorer-thumbnails-enabled"
+description = "Enables the get_explorer_thumbnails_enabled command without any pre-configured scope."
+commands.allow = ["get_explorer_thumbnails_enabled"]
+
+[[permission]]
+identifier = "deny-get-explorer-thumbnails-enabled"
+description = "Denies the get_explorer_thumbnails_enabled command without any pre-configured scope."
+commands.deny = ["get_explorer_thumbnails_enabled"]
