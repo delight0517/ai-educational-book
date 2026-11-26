@@ -19,7 +19,7 @@
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
                 <Button Content="Open" Click="Open_Click"/><Button Content="Save" Click="Save_Click"/><Button Content="Only Chat" Click="ChatTab_Click"/>
                 <Button Content="Reload editor module" Click="ReloadModule_Click"/>
-                <Button Content="Discord" Click="Discord_Click"/><Button Content="Feedback" Click="Feedback_Click"/><Button Content="Update" Click="Update_Click"/><Button Content="Homepage" Click="Homepage_Click"/>
+                <Button Content="Discord" Click="Discord_Click"/><Button Content="Feedback" Click="Feedback_Click"/><Button x:Name="UpdateButton" Content="Update" Visibility="Collapsed" Click="Update_Click"/><Button Content="Homepage" Click="Homepage_Click"/>
             </StackPanel>
             <StackPanel><TextBlock Text="AI Educational Book" FontSize="25" FontWeight="SemiBold" Foreground="{StaticResource Ink}"/><TextBlock Text="Write clearly. Read deeply." Foreground="{StaticResource Muted}" Margin="0,3,0,0"/></StackPanel>
         </DockPanel>

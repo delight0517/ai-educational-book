@@ -36,6 +36,28 @@ public partial class MainWindow : Window
         RefreshEditor();
         RefreshContents();
         ShowPage(0);
+        Loaded += (_, _) => _ = RefreshUpdateButtonAsync();
+    }
+
+    private async Task RefreshUpdateButtonAsync()
+    {
+        try
+        {
+            var result = await CommunityAndUpdateService.CheckForUpdatesAsync();
+            if (result.Ok && result.UpdateAvailable)
+            {
+                UpdateButton.Content = $"Update ({result.LatestTag})";
+                UpdateButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                UpdateButton.Visibility = Visibility.Collapsed;
+            }
+        }
+        catch
+        {
+            UpdateButton.Visibility = Visibility.Collapsed;
+        }
     }
 
     public async Task<SmokeReport> RunSmokeChecksAsync(string? docxPath)
