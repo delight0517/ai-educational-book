@@ -40,8 +40,8 @@ export default function Page() {
         checkAppReleaseNotes();
       }
     };
-    if (appService?.hasWindow && settings.alwaysOnTop) {
-      tauriHandleSetAlwaysOnTop(settings.alwaysOnTop);
+    if (appService?.hasWindow) {
+      tauriHandleSetAlwaysOnTop(false);
     }
     doCheckAppUpdates();
     // eslint-disable-next-line react-hooks/exhaustive-deps

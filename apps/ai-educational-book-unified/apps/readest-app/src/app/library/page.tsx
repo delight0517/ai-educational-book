@@ -409,6 +409,54 @@ const LibraryPageContent = ({ searchParams }: { searchParams: ReadonlyURLSearchP
   useLibraryRefresh(scrollRef, pullLibrary);
   useInboxDrainer();
   const { isDragging } = useDragDropImport();
+
+  // Universal user library storage initialization & Millie shortcut detection
+  useEffect(() => {
+    if (!isTauriAppPlatform()) return;
+
+    let unlisten: (() => void) | undefined;
+    const listenStatus = async () => {
+      try {
+        const { listen } = await import('@tauri-apps/api/event');
+        unlisten = await listen<string>('library_storage_status', (event) => {
+          eventDispatcher.dispatch('toast', {
+            type: 'info',
+            message: event.payload,
+            timeout: 3500,
+          });
+        });
+      } catch (err) {
+        console.warn('Failed to listen to library_storage_status:', err);
+      }
+    };
+    listenStatus();
+
+    const initLibrary = async () => {
+      try {
+        const { invoke } = await import('@tauri-apps/api/core');
+        eventDispatcher.dispatch('toast', {
+          type: 'info',
+          message: '서재 저장소 위치를 검색하고 있습니다. 잠시만 기다려주십시오.',
+          timeout: 3000,
+        });
+        const result: any = await invoke('init_user_library_storage');
+        if (result?.millie_shortcut_created) {
+          eventDispatcher.dispatch('toast', {
+            type: 'success',
+            message: '서재에 밀리의 서재 바로가기가 연동되었습니다.',
+            timeout: 4000,
+          });
+        }
+      } catch (err) {
+        console.error('Failed to init user library storage:', err);
+      }
+    };
+    initLibrary();
+
+    return () => {
+      if (unlisten) unlisten();
+    };
+  }, []);
   useShortcuts({
     onToggleFullscreen: () => {
       if (!isTauriAppPlatform()) return false;
@@ -507,11 +555,9 @@ const LibraryPageContent = ({ searchParams }: { searchParams: ReadonlyURLSearchP
   });
 
   useEffect(() => {
-    if (settings.alwaysOnTop) {
-      tauriHandleSetAlwaysOnTop(settings.alwaysOnTop);
-    }
+    tauriHandleSetAlwaysOnTop(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [appService?.hasUpdater, settings]);
+  }, [appService?.hasUpdater]);
 
   useEffect(() => {
     if (appService?.isMobileApp) {
@@ -788,7 +834,46 @@ const LibraryPageContent = ({ searchParams }: { searchParams: ReadonlyURLSearchP
       }
 
       // Reuse the library from the store when we return from the reader
-      const library = hasCachedLibrary ? libraryBooks : await appService.loadLibraryBooks();
+      const diskLibrary = hasCachedLibrary ? libraryBooks : await appService.loadLibraryBooks();
+      const hasSelah = diskLibrary.some((b) => b.hash === 'selah-bible-book' || b.url?.includes('selah-bible-meditation'));
+      const hasMillie = diskLibrary.some((b) => b.hash === 'millie-library-book' || b.url?.includes('millie.co.kr'));
+      const pinnedShortcuts: Book[] = [
+        ...(hasSelah
+          ? []
+          : [
+              {
+                hash: 'selah-bible-book',
+                title: 'Selah · 말씀 묵상 (무료 성경)',
+                author: 'Selah Bible',
+                format: 'HTML' as const,
+                url: 'https://delight0517.github.io/selah-bible-meditation/?windowsShell=1',
+                groupName: '성경 묵상',
+                readingStatus: 'reading' as const,
+                coverImageUrl: 'https://delight0517.github.io/selah-bible-meditation/assets/selah-app-512.png',
+                importedAt: 1700000000000,
+                createdAt: 1700000000000,
+                updatedAt: 1700000000000,
+              } as Book,
+            ]),
+        ...(hasMillie
+          ? []
+          : [
+              {
+                hash: 'millie-library-book',
+                title: '밀리의 서재',
+                author: 'Millie',
+                format: 'HTML' as const,
+                url: 'https://www.millie.co.kr/',
+                groupName: '밀리의 서재',
+                readingStatus: 'reading' as const,
+                coverImageUrl: '/images/millie-cover.svg',
+                importedAt: 1700000000001,
+                createdAt: 1700000000001,
+                updatedAt: 1700000000001,
+              } as Book,
+            ]),
+      ];
+      const library = [...pinnedShortcuts, ...diskLibrary];
       let opened = false;
       if (checkOpenWithBooks) {
         opened = await handleOpenWithBooks(appService, library);

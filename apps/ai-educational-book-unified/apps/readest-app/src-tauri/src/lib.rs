@@ -41,6 +41,7 @@ mod file_reveal;
 mod linux_display;
 #[cfg(all(target_os = "linux", any(feature = "cef", test)))]
 mod linux_single_instance;
+mod library_manager;
 mod localsend;
 #[cfg(target_os = "macos")]
 mod macos;
@@ -49,6 +50,10 @@ mod mobi_parser;
 mod nightly_update;
 mod parser_common;
 mod pdf_parser;
+#[cfg(desktop)]
+mod plover_steno;
+#[cfg(desktop)]
+mod publish_bridge;
 mod range_file;
 mod sentry_config;
 #[cfg(desktop)]
@@ -703,6 +708,10 @@ pub fn run() {
             discord_rpc::clear_book_presence,
             clip_url::clip_url,
             web_browser::open_web_browser,
+            #[cfg(desktop)]
+            publish_bridge::get_only_chat_endpoint,
+            #[cfg(desktop)]
+            publish_bridge::publish_to_brunch_via_3f,
             browser_fetch::fetch_web_browser_resource,
             media_proxy::get_media_proxy_base,
             media_proxy::get_media_file_url,
@@ -716,11 +725,23 @@ pub fn run() {
             localsend::commands::localsend_set_discoverable,
             localsend::commands::localsend_is_alive,
             localsend::commands::localsend_respond,
+            library_manager::init_user_library_storage,
+            library_manager::launch_selah_app,
+            library_manager::launch_millie_app,
+            library_manager::get_user_afk_status,
             localsend::commands::localsend_cancel_receive,
             localsend::commands::localsend_send_files,
             localsend::commands::localsend_cancel_send,
             #[cfg(desktop)]
             spawn_fresh_browser::spawn_fresh_browser,
+            #[cfg(desktop)]
+            plover_steno::is_plover_running,
+            #[cfg(desktop)]
+            plover_steno::launch_plover,
+            #[cfg(desktop)]
+            plover_steno::get_plover_config_info,
+            #[cfg(desktop)]
+            plover_steno::lookup_steno_chords,
             nightly_update::verify_update_signature,
             #[cfg(any(target_os = "macos", target_os = "windows", target_os = "linux"))]
             nightly_update::install_nightly_update,
@@ -1006,6 +1027,7 @@ pub fn run() {
                 let mut builder = win_builder
                     .decorations(false)
                     .visible(false)
+                    .always_on_top(false)
                     .shadow(undecorated_shadow_is_symmetric())
                     .title("AI Educational Book");
 
@@ -1013,7 +1035,12 @@ pub fn run() {
                 {
                     builder = builder
                         .transparent(false)
-                        .scroll_bar_style(ScrollBarStyle::FluentOverlay);
+                        .scroll_bar_style(ScrollBarStyle::FluentOverlay)
+                        .additional_browser_args(
+                            "--disable-features=CalculateNativeWinOcclusion \
+                             --enable-features=msWebView2EnableDraggableRegionsBAT \
+                             --disable-smooth-scrolling"
+                        );
                 }
                 #[cfg(target_os = "linux")]
                 {

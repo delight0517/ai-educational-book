@@ -20,7 +20,19 @@ import type { WebSource } from '@/types/webSource';
 
 // Stable fallback: a fresh `[]` per render would be an unstable zustand
 // snapshot and loop React until error #185 (seen on the first device run).
-const NO_SOURCES: WebSource[] = [];
+const DEFAULT_WEB_SOURCES: WebSource[] = [
+  {
+    id: 'millie-library',
+    name: '밀리의 서재 다운받기 (Millie 내 서재)',
+    url: 'https://www.millie.co.kr/',
+  },
+  {
+    id: 'selah-bible',
+    name: '셀라 성경 다운받기 (Selah · 말씀 묵상)',
+    url: 'https://delight0517.github.io/selah-bible-meditation/?windowsShell=1',
+  },
+];
+const NO_SOURCES: WebSource[] = DEFAULT_WEB_SOURCES;
 
 interface WebSourcesDialogProps {
   isOpen: boolean;
@@ -106,9 +118,7 @@ const WebSourcesDialog: React.FC<WebSourcesDialogProps> = ({ isOpen, onClose, on
     >
       <div className='flex flex-col gap-4 pb-6 pt-2'>
         <p className='text-neutral-content text-sm leading-relaxed'>
-          {_(
-            'Open a website, sign in if needed, then choose Clip Page to save it to your library. Books you download are also imported.',
-          )}
+          밀리의 서재 다운받기 또는 셀라 성경 다운받기를 선택해 열거나, 원하는 웹 주소를 입력해 서재로 가져올 수 있습니다.
         </p>
 
         {sources.length > 0 && (
