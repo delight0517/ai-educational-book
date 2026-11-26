@@ -308,6 +308,83 @@ public partial class MainWindow : Window
         RefreshEditor(); RefreshContents(); ModuleText.Text = result.Status; ShowPage(_page);
         StatusText.Text = "Editor module reloaded · draft restored";
     }
+    private void Discord_Click(object sender, RoutedEventArgs e)
+    {
+        try { CommunityAndUpdateService.OpenExternalUrl(CommunityAndUpdateService.DiscordInviteUrl); StatusText.Text = "Discord 커뮤니티를 열었습니다."; }
+        catch (Exception ex) { MessageBox.Show(this, ex.Message, "Discord", MessageBoxButton.OK, MessageBoxImage.Warning); }
+    }
+    private void Homepage_Click(object sender, RoutedEventArgs e)
+    {
+        try { CommunityAndUpdateService.OpenExternalUrl(CommunityAndUpdateService.HomepageUrl); StatusText.Text = "공식 홈페이지를 열었습니다."; }
+        catch (Exception ex) { MessageBox.Show(this, ex.Message, "Homepage", MessageBoxButton.OK, MessageBoxImage.Warning); }
+    }
+    private async void Update_Click(object sender, RoutedEventArgs e)
+    {
+        StatusText.Text = "GitHub 최신 릴리스 확인 중…";
+        var result = await CommunityAndUpdateService.CheckForUpdatesAsync();
+        StatusText.Text = result.Message;
+        var text = result.Message + (string.IsNullOrWhiteSpace(result.ReleaseNotes) ? "" : "\n\n" + result.ReleaseNotes.Trim());
+        var target = result.DownloadUrl ?? result.ReleaseUrl;
+        if (result.UpdateAvailable)
+        {
+            if (MessageBox.Show(this, text + "\n\n지금 다운로드/릴리스 페이지를 여시겠습니까?", "업데이트 확인", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+            {
+                CommunityAndUpdateService.OpenExternalUrl(target);
+            }
+        }
+        else
+        {
+            MessageBox.Show(this, text, "업데이트 확인", MessageBoxButton.OK, result.Ok ? MessageBoxImage.Information : MessageBoxImage.Warning);
+        }
+    }
+    private void Feedback_Click(object sender, RoutedEventArgs e)
+    {
+        var dlg = new Window
+        {
+            Title = "AI Educational Book · 피드백 & 로그 제보",
+            Width = 500,
+            Height = 360,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            Owner = this,
+            Background = Brushes.White
+        };
+        var root = new StackPanel { Margin = new Thickness(18) };
+        root.Children.Add(new TextBlock { Text = "카테고리", FontWeight = FontWeights.SemiBold, Margin = new Thickness(0, 0, 0, 4) });
+        var catBox = new ComboBox { Margin = new Thickness(0, 0, 0, 10) };
+        catBox.Items.Add("버그 제보");
+        catBox.Items.Add("기능 제안");
+        catBox.Items.Add("일반 피드백");
+        catBox.SelectedIndex = 0;
+        root.Children.Add(catBox);
+
+        root.Children.Add(new TextBlock { Text = "내용 (진단 로그 ZIP이 함께 생성됩니다)", FontWeight = FontWeights.SemiBold, Margin = new Thickness(0, 0, 0, 4) });
+        var msgBox = new TextBox { Height = 140, AcceptsReturn = true, TextWrapping = TextWrapping.Wrap, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, Padding = new Thickness(8), Margin = new Thickness(0, 0, 0, 12) };
+        root.Children.Add(msgBox);
+
+        var btnRow = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right };
+        var btnGithub = new Button { Content = "로그 번들 + GitHub 이슈", Padding = new Thickness(12, 7, 12, 7), Margin = new Thickness(0, 0, 8, 0) };
+        var btnDiscord = new Button { Content = "로그 번들 + Discord", Padding = new Thickness(12, 7, 12, 7) };
+        void Submit(string url)
+        {
+            var category = catBox.SelectedItem?.ToString() ?? "일반 피드백";
+            var bundle = CommunityAndUpdateService.CreateFeedbackBundle(category, msgBox.Text, StatusText.Text, _onlyChatConnected);
+            if (bundle.Ok)
+            {
+                Clipboard.SetText(bundle.SummaryText);
+                StatusText.Text = "피드백 요약 복사 및 로그 ZIP 생성 완료";
+                try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("explorer.exe", $"/select,\"{bundle.ZipPath}\"") { UseShellExecute = true }); } catch { }
+            }
+            CommunityAndUpdateService.OpenExternalUrl(url);
+            dlg.Close();
+        }
+        btnGithub.Click += (_, _) => Submit(CommunityAndUpdateService.IssuesNewUrl);
+        btnDiscord.Click += (_, _) => Submit(CommunityAndUpdateService.DiscordInviteUrl);
+        btnRow.Children.Add(btnGithub);
+        btnRow.Children.Add(btnDiscord);
+        root.Children.Add(btnRow);
+        dlg.Content = root;
+        dlg.ShowDialog();
+    }
     private void Window_Closed(object? sender, EventArgs e) => _onlyChat.Dispose();
     protected override void OnPreviewKeyDown(KeyEventArgs e)
     {
